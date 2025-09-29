@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MG Photography — Gautam modhvadiya</title>
+  <meta name="description" content="MG Photography — Professional photography portfolio by Uday Pandavadara. Portraits, commercial, travel & editorial work." />
+  <meta name="author" content="Uday Pandavadara" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <!-- Google font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#ff6b6b; --glass: rgba(255,255,255,0.03);
+      --maxw:1200px; --radius:14px; --gap:20px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, #071024 0%, #08141f 60%);
+      color: #e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:80px;
+    }
+    .wrap{max-width:var(--maxw); margin:28px auto; padding:28px; display:grid; gap:28px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#222b44,#10213a);
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:18px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.6);
+    }
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.6px}
+    nav{display:flex;gap:16px;align-items:center}
+    nav a{color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:600}
+    nav a:hover{color:#fff; background:rgba(255,255,255,0.02) }
+
+    /* Hero */
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:var(--radius);
+      padding:36px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px rgba(255,255,255,0.02);
+    }
+    .hero .lead h2{margin:0 0 8px;font-size:28px}
+    .hero .lead p{margin:0;color:var(--muted)}
+    .cta{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:12px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff8f6b); color:#0b1220; box-shadow: 0 6px 20px rgba(255,107,107,0.16)}
+    .btn-ghost{background:transparent;color:#eaf1ff;border:1px solid rgba(255,255,255,0.04)}
+
+    /* Info cards */
+    .info-grid{display:flex;gap:14px;flex-wrap:wrap}
+    .card{background:var(--card); padding:14px;border-radius:12px;min-width:160px;flex:1}
+    .card h3{margin:0 0 6px;font-size:14px}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Gallery */
+    .section{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:20px;border-radius:12px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .filter-btn{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);background:transparent;cursor:pointer;color:var(--muted)}
+    .filter-btn.active{background:linear-gradient(90deg,#1b2a44,#132033); color:#fff; border-color:rgba(255,255,255,0.06)}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+    .tile{position:relative;overflow:hidden;border-radius:10px;background:var(--glass); cursor:pointer; min-height:150px}
+    .tile img{width:100%;height:100%; object-fit:cover; display:block; transition:transform .6s ease}
+    .tile:hover img{transform:scale(1.06)}
+    .tile .meta{position:absolute;left:10px;bottom:10px;padding:8px 10px;background:rgba(0,0,0,0.45);border-radius:8px;font-size:13px}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.8);z-index:1200}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92%;max-height:86%;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,0.8)}
+
+    /* About / two-col */
+    .cols{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+    .about p{color:var(--muted)}
+
+    /* Contact */
+    form{display:grid;gap:10px}
+    input,textarea,select{
+      background:transparent;border:1px solid rgba(255,255,255,0.04); padding:12px;border-radius:10px;color:inherit;font-size:14px;
+    }
+    textarea{min-height:120px; resize:vertical}
+    .row{display:flex;gap:10px}
+    .row > *{flex:1}
+
+    footer{opacity:0.8; color:var(--muted); font-size:13px; text-align:center; padding-top:10px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .cols{grid-template-columns:1fr}
+      .wrap{padding:18px}
+    }
+    @media (max-width:520px){
+      nav{display:none}
+      .logo{width:48px;height:48px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:13px}
+    .kbd{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="top">
+
+    <header>
+      <div class="brand" aria-label="MG Photography">
+        <div class="logo" aria-hidden="true">MG</div>
+        <div>
+          <h1>MG Photography</h1>
+          <div class="muted">Gautam modhvadiya — Professional Photographer</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" role="banner" aria-labelledby="hero-title">
+      <div class="lead">
+        <h2 id="hero-title">Creating visual stories with light & detail</h2>
+        <p>Commercial, portrait, editorial and travel photography. Available for commissions worldwide.</p>
+
+        <div class="cta">
+          <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a shoot</button>
+          <a class="btn btn-ghost" href="#portfolio" role="button">See portfolio</a>
+        </div>
+
+        <div style="margin-top:18px" class="info-grid" aria-hidden="false">
+          <div class="card"><h3>Experience</h3><p>8+ years in studio & location photography</p></div>
+          <div class="card"><h3>Clients</h3><p>Brands, editorial, portraits & events</p></div>
+          <div class="card"><h3>Gear</h3><p>Full-frame bodies, pro lenses, lighting kit</p></div>
+        </div>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:12px;">
+        <!-- Featured image -->
+        <div style="border-radius:12px;overflow:hidden;box-shadow:0 10px 40px rgba(2,6,23,0.6)">
+          <img src="soft ligte.webp" alt="Featured photo" style="width:100%;height:370px;object-fit:cover;display:block">
+        </div>
+
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
+            <div class="muted">Location</div>
+            <div style="font-weight:700">Jamanagar, India</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
+            <div class="muted">Availability</div>
+            <div style="font-weight:700">By appointment</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section" aria-labelledby="portfolio-title">
+      <h2 id="portfolio-title" style="margin:0 0 12px">Selected Work</h2>
+
+      <div class="filters" role="tablist" aria-label="Filter portfolio">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-btn" data-filter="portrait" role="tab">Portrait</button>
+        <button class="filter-btn" data-filter="travel" role="tab">Travel</button>
+        <button class="filter-btn" data-filter="editorial" role="tab">Editorial</button>
+        <button class="filter-btn" data-filter="commercial" role="tab">Commercial</button>
+      </div>
+
+      <div class="gallery" id="gallery" aria-live="polite">
+        <!-- Each tile has data-category attribute used by JS filter -->
+        <!-- Replace the image src with your own images -->
+
+        <figure class="tile" data-category="portrait" tabindex="0" title="Portrait — Soft light">
+          <img src="soft ligte.webp" alt="Portrait sample">
+          <figcaption class="meta">Portrait — Soft light</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="travel" tabindex="0" title="Travel — Mountain scene">
+          <img src="" alt="Travel sample">
+          <figcaption class="meta">Travel — Mountains</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="editorial" tabindex="0" title="Editorial — Fashion">
+          <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=1200&auto=format&fit=crop" alt="Editorial sample">
+          <figcaption class="meta">Editorial — Fashion</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="commercial" tabindex="0" title="Commercial — Product">
+          <img src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1200&auto=format&fit=crop" alt="Commercial sample">
+          <figcaption class="meta">Commercial — Product</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="portrait" tabindex="0" title="Portrait — Dramatic">
+          <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1200&auto=format&fit=crop" alt="Portrait 2">
+          <figcaption class="meta">Portrait — Dramatic</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="travel" tabindex="0" title="Travel — Desert">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Travel 2">
+          <figcaption class="meta">Travel — Desert</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="portrait" tabindex="0" title="Portrait — Soft light">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Portrait sample">
+          <figcaption class="meta">Portrait — Soft light</figcaption>
+        </figure>
+
+        <figure class="tile" data-category="portrait" tabindex="0" title="Portrait — Soft light">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Portrait sample">
+          <figcaption class="meta">Portrait — Soft light</figcaption>
+        </figure>
+
+
+
+        <!-- Add more tiles as needed -->
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+      <button id="lb-close" style="position:absolute;top:18px;right:18px;padding:10px;border-radius:8px;background:rgba(0,0,0,0.4);border:0;color:#fff;cursor:pointer">✕</button>
+      <img alt="Enlarged photo" id="lb-img" src="">
+    </div>
+
+    <!-- SERVICES + ABOUT -->
+    <section id="services" class="section cols" aria-labelledby="services-title">
+      <div>
+        <h2 id="services-title" style="margin-top:0">Services</h2>
+        <div style="display:grid;gap:12px">
+          <div style="background:var(--card);padding:14px;border-radius:10px">
+            <h3 style="margin:0 0 6px">Portraits & Headshots</h3>
+            <p class="muted">Studio and on-location portrait sessions for professionals and artists.</p>
+          </div>
+
+          <div style="background:var(--card);padding:14px;border-radius:10px">
+            <h3 style="margin:0 0 6px">Commercial & Product</h3>
+            <p class="muted">Product photography, e-commerce assets, and brand campaigns.</p>
+          </div>
+
+          <div style="background:var(--card);padding:14px;border-radius:10px">
+            <h3 style="margin:0 0 6px">Editorial & Travel</h3>
+            <p class="muted">Magazine editorials, travel features, and location storytelling.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside id="about" class="about" aria-labelledby="about-title">
+        <h3 id="about-title" style="margin-top:0">About — Gautam</h3>
+        <p>I’m Gautam modhvadiya — lead photographer at MG Photography. I focus on creating moody, filmic images that emphasise character, texture and light. My work has been used in editorial spreads and brand campaigns. Available for collaborations worldwide.</p>
+
+        <div style="margin-top:12px;display:flex;gap:8px;">
+          <div style="flex:1;background:rgba(255,255,255,0.02);padding:10px;border-radius:10px">
+            <div class="muted">Email</div><div style="font-weight:700">hello@mgphotography.com</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,0.02);padding:10px;border-radius:10px">
+            <div class="muted">Phone</div><div style="font-weight:700">+91 97147 88719</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact / Bookings</h2>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px">
+        <div>
+          <form id="contactForm" onsubmit="return handleSubmit(event)" novalidate>
+            <div class="row">
+              <input id="name" name="name" placeholder="Your name *" required>
+              <input id="email" type="email" name="email" placeholder="Email *" required>
+            </div>
+            <input id="subject" name="subject" placeholder="Subject">
+            <textarea id="message" name="message" placeholder="Tell me about your project *" required></textarea>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+              <button class="btn btn-primary" type="submit">Send message</button>
+              <div class="muted" style="font-size:12px">Response within 48 hours</div>
+            </div>
+
+            <div id="formMsg" role="status" style="margin-top:8px;color:#bfe3c2"></div>
+          </form>
+        </div>
+
+        <aside style="display:grid;gap:8px">
+          <div style="background:var(--card);padding:12px;border-radius:10px">
+            <div class="muted">Studio</div>
+            <div style="font-weight:700">MG Photography — Jamanagar, India</div>
+            <div class="muted" style="margin-top:6px">Open by appointment</div>
+          </div>
+
+          <div style="border-radius:10px; overflow:hidden;">
+  <iframe 
+    title="MG Photography, Jamnagar" 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.341259159888!2d70.05772917500028!3d22.4706995795651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3956711b1e2e8a23%3A0x9d57f7a2bb8a6f40!2sMG%20Photography!5e0!3m2!1sen!2sin!4v1738239023000!5m2!1sen!2sin" 
+    width="100%" 
+    height="210" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+
+         <div style="background:var(--card);padding:12px;border-radius:10px">
+  <div class="muted">Social</div>
+  <div style="display:flex;gap:12px;margin-top:8px;align-items:center;">
+    
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/mg_photography_jam/" target="_blank" aria-label="Instagram" style="color:inherit;text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 4A5.25 5.25 0 1 1 6.75 12 5.25 5.25 0 0 1 12 7.5zm0 1.5A3.75 3.75 0 1 0 15.75 12 3.75 3.75 0 0 0 12 9zm5.25-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/>
+      </svg>
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://facebook.com/" target="_blank" aria-label="Facebook" style="color:inherit;text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.2 3-3.2 .9 0 1.8.2 1.8.2v2h-1c-1 0-1.3.6-1.3 1.2V12h2.2l-.4 3h-1.8v7A10 10 0 0 0 22 12"/>
+      </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@mgphotography2837/featured" target="_blank" aria-label="YouTube" style="color:inherit;text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M21.8 8s-.2-1.4-.8-2c-.8-.9-1.6-.9-2-1C16 5 12 5 12 5h0s-4 0-7 .1c-.4 0-1.2 0-2 1-.6.6-.8 2-.8 2S2 9.6 2 11.1v1.8C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.8.9 1.9.9 2.4 1 1.8.1 7.6.1 7.6.1s4 0 7-.1c.4 0 1.2 0 2-1 .6-.6.8-2 .8-2s.2-1.6.2-3.1v-1.8C22 9.6 21.8 8 21.8 8zM10 14.7V9.3l5.2 2.7L10 14.7z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> MG Photography — Built by Uday Pandavadara • <span class="muted">All rights reserved</span>
+    </footer>
+  </div>
+
+  <script>
+    // Basic interactions: filter gallery, lightbox, contact form validation
+    (function(){
+      // Fill year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Filtering
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const tiles = document.querySelectorAll('.tile');
+      filterButtons.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          filterButtons.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false')});
+          btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+          const filter = btn.dataset.filter;
+          tiles.forEach(t=>{
+            const cat = t.dataset.category;
+            if(filter==='all' || cat===filter) {
+              t.style.display = '';
+              t.setAttribute('tabindex','0');
+            } else {
+              t.style.display = 'none';
+              t.setAttribute('tabindex','-1');
+            }
+          });
+        });
+      });
+
+      // Lightbox
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lb-img');
+      const lbClose = document.getElementById('lb-close');
+
+      function openLB(src, alt){
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB(){
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden','true');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.tile img').forEach(img=>{
+        img.addEventListener('click', (e)=>{
+          openLB(e.currentTarget.src, e.currentTarget.alt);
+        });
+        // keyboard enter to open
+        img.parentElement.addEventListener('keydown', (e)=>{
+          if(e.key==='Enter' || e.key===' '){ openLB(img.src, img.alt); e.preventDefault(); }
+        });
+      });
+      lbClose.addEventListener('click', closeLB);
+      lb.addEventListener('click', (e)=>{
+        if(e.target === lb) closeLB();
+      });
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLB(); });
+
+      // Contact form (frontend only)
+      window.handleSubmit = function(ev){
+        ev.preventDefault();
+        const f = ev.target;
+        const name = f.name.value.trim();
+        const email = f.email.value.trim();
+        const message = f.message.value.trim();
+        const formMsg = document.getElementById('formMsg');
+
+        // simple validation
+        if(!name || !email || !message){
+          formMsg.style.color = '#f3b6b6';
+          formMsg.textContent = 'Please enter your name, email, and a short message.';
+          return false;
+        }
+        // email pattern
+        const re = /^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/;
+        if(!re.test(email)){
+          formMsg.style.color = '#f3b6b6';
+          formMsg.textContent = 'Please enter a valid email address.';
+          return false;
+        }
+
+        // simulate send (replace this area with real API / server)
+        formMsg.style.color = '#bfe3c2';
+        formMsg.textContent = 'Thanks — your message was captured. (This demo form does not send email. Connect a backend to process messages.)';
+        f.reset();
+        return false;
+      };
+
+      // Accessibility small enhancement: allow skipping to sections with hash navigation smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          if(href.length>1){
+            const el = document.querySelector(href);
+            if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+          }
+        })
+      });
+    })();
+  </script>
+</body>
+</html>
